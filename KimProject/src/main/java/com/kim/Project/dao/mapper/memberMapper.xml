@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Member"> 
+	
+	<insert id="memberJoin" parameterType="member">
+	
+		INSERT INTO MEMBER100 (MID,MPASSWORD,MNAME,MBIRTH,MADDRESS,MPOSTCODE,MDETAILADDRESS,MEXTRAADDRESS,MEMAIL,MPHONE,MFILENAME) VALUES 
+		(#{mid},#{mpassword},#{mname},#{mbirth},#{maddress},#{mpostcode},#{mdetailaddress},#{mextraaddress},#{memail},#{mphone},#{mfilename})
+	
+	</insert>
+	<select id="memberLogin" parameterType="member" resultType="String">
+		
+		SELECT * FROM MEMBER100 WHERE MID=#{mid} AND MPASSWORD=#{mpassword}
+	
+	</select>
+	
+	<select id="memberList" resultType="member">
+	
+		SELECT * FROM MEMBER100
+	
+	
+	</select>
+	
+	<select id="memberView" parameterType="String" resultType="member">
+	
+		SELECT * FROM MEMBER100 WHERE MID=#{mid}
+	
+	</select>
+	
+	
+	<select id="memberDelete" parameterType="String" resultType="member">
+	
+		DELETE FROM MEMBER100 WHERE MID=#{mid}
+	
+	</select>
+	
+	<select id="memberUpdateProcess" parameterType="member">
+	
+		UPDATE MEMBER100 SET MPASSWORD=#{mpassword},MNAME=#{mname},MBIRTH=#{mbirth},MADDRESS=#{maddress},MEMAIL=#{memail},MPHONE=#{mphone} WHERE MID=#{mid}
+	
+	
+	</select>
+	
+    <insert parameterType="member" id="memberUproad">
+	 
+		INSERT INTO MEMBER100 (MFILENAME) VALUES (#{Mfilename})
+	
+	</insert>
+	<select id="idOverlap" parameterType="String" resultType="String">
+	
+		SELECT MID FROM MEMBER100 WHERE MID=#{mid}
+
+	</select>
+	
+		
+		
+	<select id="kakaoLogin" parameterType="String" resultType="String">
+		SELECT MID FROM MEMBER100 WHERE KAKAOID=#{kakaoId}
+	</select>
+	<insert id="kakaoJoin" parameterType="member">
+		
+		INSERT INTO MEMBER100 (MID,KAKAOID,MPASSWORD,MNAME,MBIRTH,MADDRESS,MPOSTCODE,MDETAILADDRESS,MEXTRAADDRESS,MEMAIL,MPHONE,MFILENAME) VALUES 
+		(#{mid},#{kakaoId},#{mpassword},#{mname},#{mbirth},#{maddress},#{mpostcode},#{mdetailaddress},#{mextraaddress},#{memail},#{mphone},#{mfilename})
+	
+	</insert>
+	
+		<insert id="naverLogin" parameterType="member">
+		
+		INSERT INTO MEMBER100 (MID,KAKAOID,NAVERID,MPASSWORD,MNAME,MBIRTH,MADDRESS,MPOSTCODE,MDETAILADDRESS,MEXTRAADDRESS,MEMAIL,MPHONE,MFILENAME) VALUES 
+		(#{mid},#{kakaoId},#{naverId},#{mpassword},#{mname},#{mbirth},#{maddress},#{mpostcode},#{mdetailaddress},#{mextraaddress},#{memail},#{mphone},#{mfilename})
+	
+	</insert>
+	
+	
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

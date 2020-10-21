@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Board"> 
+ 
+ <insert id="BoardWrite" parameterType="board">
+ 	
+ 	INSERT INTO BOARD11(BNUMBER,BWRITER,BPASSWORD,BTITLE,BCONTENTS,BDATE,BHITS) VALUEW
+ 	(BOARD_SQC,#{bwriter},#{bpaswword},#{btitle},#{bcontents},SYSDATE,0)
+ 
+ </insert>
+ 
+ <select id="BoardList" resultType="board">
+ 
+ 	SELECT * FROM BOARD11
+ 
+ 
+ </select>
+ 
+ <select id="BoardView" parameterType="int" resultType="board">
+ 
+ 	SELECT * FROM BOARD11 WHERE BNUMBER=#{bnumber}
+ 
+ 
+ </select>
+ 	<update id="boardUpdate" parameterType="board">
+		UPDATE BOARD11 SET BTITLE=#{btitle}, BCONTENTS=#{bcontents} WHERE BNUMBER=#{bnumber}
+	</update>
+	
+	<delete id="boardDelete" parameterType="int">
+		DELETE FROM BOARD11 WHERE BNUMBER=#{bnumber}
+	</delete>
+	
+	<select id="boardListCount" resultType="int">
+		SELECT COUNT(BNUMBER) FROM BOARD11
+	</select>
+	
+	<select id="boardListPaging" parameterType="page" resultType="board">
+		SELECT * FROM (SELECT B.*, ROW_NUMBER() OVER(ORDER BY BNUMBER DESC)
+			AS RN FROM BOARD11 B) WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+ 
+ 
+ 
+	
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
